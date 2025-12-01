@@ -10,6 +10,7 @@
 
 module vga_controller(
     input logic clk_100MHz,   // from FPGA
+    input logic clk_25MHz, // Scanning Rate for each pixel
     input logic reset,        // system reset
     output logic video_on,    // ON while pixel counts for x and y and within display area
     output logic hsync,       // horizontal sync
@@ -33,17 +34,6 @@ module vga_controller(
     parameter VR = 2;               // vertical retrace length in pixels  
     parameter VMAX = VD+VF+VB+VR-1; // max value of vertical counter = 524   
     
-    // *** Generate 25MHz from 100MHz *********************************************************
-	logic  [1:0] r_25MHz;
-	logic w_25MHz;
-	
-	always @(posedge clk_100MHz or posedge reset)
-		if(reset)
-		  r_25MHz <= 0;
-		else
-		  r_25MHz <= r_25MHz + 1;
-	
-	assign w_25MHz = (r_25MHz == 0) ? 1 : 0; // assert tick 1/4 of the time
     // ****************************************************************************************
     
     // Counter Registers, two each for buffering to avoid glitches
@@ -70,7 +60,7 @@ module vga_controller(
         end
          
     //Logic for horizontal counter
-    always @(posedge w_25MHz or posedge reset)      // pixel tick
+    always @(posedge clk_25MHz or posedge reset)      // pixel tick
         if(reset)
             h_count_next = 0;
         else
@@ -80,7 +70,7 @@ module vga_controller(
                 h_count_next = h_count_reg + 1;         
   
     // Logic for vertical counter
-    always @(posedge w_25MHz or posedge reset)
+    always @(posedge clk_25MHz or posedge reset)
         if(reset)
             v_count_next = 0;
         else
@@ -104,6 +94,6 @@ module vga_controller(
     assign vsync  = v_sync_reg;
     assign x      = h_count_reg;
     assign y      = v_count_reg;
-    assign p_tick = w_25MHz;
+    assign p_tick = clk_25MHz;
             
 endmodule
