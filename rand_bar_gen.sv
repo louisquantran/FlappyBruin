@@ -30,8 +30,8 @@ module rand_bar_gen(
         end
     end
     
-    logic [17:0] lvl1_speed = 200000;
-    logic [17:0] lvl2_speed = 225000;
+    logic [17:0] lvl1_speed = 250000;
+    logic [17:0] lvl2_speed = 200000;
     always_ff @(posedge clk_25MHz or posedge reset) begin
         if (reset) begin   
             wraps <= 1'b0;

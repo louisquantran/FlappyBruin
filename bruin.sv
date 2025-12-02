@@ -21,9 +21,9 @@ module bruin(
     assign width = 5'd20;
    
     logic [8:0] y_0 = 9'd240; // 240
-    logic [8:0] flap_speed = 9'd80; // Every flap, move up 30 pixel in 30 frames (game is 60 FPS, so half second)
-    logic [8:0] flap_rate = 9'd8; // move up 6 pixel
-    logic [8:0] falling_rate = 9'd4;
+    logic [8:0] flap_speed = 9'd60; // Every flap, move up 30 pixel in 30 frames (game is 60 FPS, so half second)
+    logic [8:0] flap_rate = 9'd6; // move up 6 pixel
+    logic [8:0] falling_rate = 9'd2;
     logic [8:0] falling_speed = 9'd40;
     logic [8:0] max_high = 9'd10; // 20/2=10
     logic [8:0] min_high = 9'd470; // 480 - 10 = 470

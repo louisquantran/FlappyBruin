@@ -134,18 +134,18 @@ module render(
             // Collision detection
             if ((bruin_x+bruin_width/2 >= x_bar_arr[0]-bar_width) &&
                 (bruin_x-bruin_width/2 <= x_bar_arr[0]) && 
-                ((bruin_y < (y_gap_arr[0]-width_gap/2)) ||
-                (bruin_y > (y_gap_arr[0]+width_gap/2)))) begin
+                (((bruin_y-bruin_high/2) <= (y_gap_arr[0]-width_gap/2)) ||
+                ((bruin_y+bruin_high/2) >= (y_gap_arr[0]+width_gap/2)))) begin
                 lose <= 1'b1;
             end else if ((bruin_x+bruin_width/2 >= x_bar_arr[1]-bar_width) &&
                 (bruin_x-bruin_width/2 <= x_bar_arr[1]) && 
-                ((bruin_y < (y_gap_arr[1]-width_gap/2)) ||
-                (bruin_y > (y_gap_arr[1]+width_gap/2))) && !lose) begin
+                (((bruin_y-bruin_high/2) <= (y_gap_arr[1]-width_gap/2)) ||
+                ((bruin_y+bruin_high/2) >= (y_gap_arr[1]+width_gap/2))) && !lose) begin
                 lose <= 1'b1;
             end else if ((bruin_x+bruin_width/2 >= x_bar_arr[2]-bar_width) &&
                 (bruin_x-bruin_width/2 <= x_bar_arr[2]) && 
-                ((bruin_y < (y_gap_arr[2]-width_gap/2)) ||
-                (bruin_y > (y_gap_arr[2]+width_gap/2))) && !lose) begin
+                (((bruin_y-bruin_high/2) <= (y_gap_arr[2]-width_gap/2)) ||
+                ((bruin_y+bruin_high/2) >= (y_gap_arr[2]+width_gap/2))) && !lose) begin
                 lose <= 1'b1;
             end
             // Scoring
@@ -169,9 +169,6 @@ module render(
         if (reset)begin
            rgb_reg <= sky;
         end else begin
-           //if (lose) begin
-              //score <= '0;
-           //end else 
            if (score_on) begin
                 rgb_reg <= score_rgb;
             // Rendering Bruin
