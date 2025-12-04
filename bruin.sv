@@ -23,11 +23,11 @@ module bruin(
     logic [8:0] y_0 = 9'd240; // 240
     logic [8:0] flap_speed = 9'd60; // Every flap, move up 30 pixel in 30 frames (game is 60 FPS, so half second)
     logic [8:0] flap_rate = 9'd6; // move up 6 pixel
-    logic [8:0] falling_rate = 9'd2;
-    logic [8:0] falling_speed = 9'd40;
+    logic [8:0] falling_rate = 9'd3;
+    logic [8:0] falling_speed = 9'd45;
     logic [8:0] max_high = 9'd10; // 20/2=10
     logic [8:0] min_high = 9'd470; // 480 - 10 = 470
-    assign x = 9'd200; // 200
+    assign x = 9'd150; // 200
 
     assign bruin_color = 12'b1111_0000_1111; // yellow/gold?
 	

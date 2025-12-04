@@ -30,8 +30,8 @@ module rand_bar_gen(
         end
     end
     
-    logic [17:0] lvl1_speed = 250000;
-    logic [17:0] lvl2_speed = 200000;
+    logic [18:0] lvl1_speed = 300000;
+    logic [18:0] lvl2_speed = 225000;
     always_ff @(posedge clk_25MHz or posedge reset) begin
         if (reset) begin   
             wraps <= 1'b0;
@@ -42,7 +42,7 @@ module rand_bar_gen(
             if (!lose) begin
                 clk_cnt <= clk_cnt + 1;
                 // go left once when clk_cnt reaches 10M, can change accordingly
-                if (score < 3) begin
+                if (score < 5) begin
                     if (clk_cnt == lvl1_speed) begin
                         clk_cnt <= '0;
                         if (x_bar == 0) begin
@@ -60,7 +60,7 @@ module rand_bar_gen(
                             wraps <= 1'b0;
                         end
                     end
-                end else if (score >= 3) begin
+                end else if (score >= 5) begin
                     if (clk_cnt == lvl2_speed) begin
                         clk_cnt <= '0;
                         if (x_bar == 0) begin
